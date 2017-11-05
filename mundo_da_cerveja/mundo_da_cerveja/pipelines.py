@@ -7,7 +7,6 @@
 import pymongo
 from scrapy.conf import settings
 from scrapy.exceptions import DropItem
-from scrapy import log
 
 
 class MundoDaCervejaPipeline(object):
@@ -33,7 +32,5 @@ class MongoDBPipeline(object):
                 raise DropItem("Missing {0}!".format(data))
         if valid:
             self.collection.insert(dict(item))
-            log.msg("Beer added to MongoDB database!",
-                    level=log.DEBUG, spider=spider)
 
         return item
