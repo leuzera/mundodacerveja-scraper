@@ -16,10 +16,16 @@ NEWSPIDER_MODULE = 'mundo_da_cerveja.spiders'
 
 ITEM_PIPELINES = {
     'scrapy.pipelines.images.ImagesPipeline': 1,
+    'mundo_da_cerveja.pipelines.MongoDBPipeline': 100,
 }
 
 IMAGES_STORE = './images/'
-LOG_LEVEL = 'INFO'
+LOG_LEVEL = 'DEBUG'
+
+MONGODB_SERVER = "localhost"
+MONGODB_PORT = 27017
+MONGODB_DB = "mundodacerveja"
+MONGODB_COLLECTION = "cervejas"
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = 'mundo_da_cerveja (+http://www.yourdomain.com)'
