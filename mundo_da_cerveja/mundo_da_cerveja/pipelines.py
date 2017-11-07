@@ -8,17 +8,10 @@ import pymongo
 import gridfs
 from scrapy.conf import settings
 from scrapy.exceptions import DropItem
-from scrapy.pipelines.images import ImagesPipeline
 
 
 class MundoDaCervejaPipeline(object):
     def process_item(self, item, spider):
-        return item
-
-
-class MyImagesPipeline(ImagesPipeline):
-    def item_completed(self, results, item, info):
-
         return item
 
 
