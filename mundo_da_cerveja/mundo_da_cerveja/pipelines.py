@@ -28,17 +28,18 @@ class MongoDBPipeline(object):
         self.fs = gridfs.GridFS(self.db, settings['MONGODB_COLLECTION'])
 
     def process_item(self, item, spider):
-        valid = True
-        for data in item:
-            if not data:
-                valid = False
-                raise DropItem("Missing {0}!".format(data))
+        if not item['images']:
+            raise DropItem("{0} sem imagem!".format(item['name']))
 
-        image = open("./images/" + item['images'][0]['path'], "rb")
-        item['images'][0]['image_id'] = self.fs.put(image)
+        image_path = settings['IMAGES_STORE']
+        image = open(image_path + item['images'][0]['path'], "rb")
+        image_id = self.fs.put(image)
 
-        if valid:
-            self.collection.insert(dict(item))
+        self.collection.update({'url': item['images'][0]['url']},
+                               {'name': item['name'],
+                                'image': image_id,
+                                'url': item['images'][0]['url']},
+                               upsert=True)
 
         return item
 
