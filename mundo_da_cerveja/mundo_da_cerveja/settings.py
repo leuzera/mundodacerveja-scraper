@@ -15,8 +15,9 @@ SPIDER_MODULES = ['mundo_da_cerveja.spiders']
 NEWSPIDER_MODULE = 'mundo_da_cerveja.spiders'
 
 ITEM_PIPELINES = {
-    'scrapy.pipelines.images.ImagesPipeline': 1,
-    'mundo_da_cerveja.pipelines.MongoDBPipeline': 100,
+    'mundo_da_cerveja.pipelines.MundoDaCervejaPipeline': 10,
+    'scrapy.pipelines.images.ImagesPipeline': 20,
+    # 'mundo_da_cerveja.pipelines.MongoDBPipeline': 30,
 }
 
 IMAGES_STORE = './images/'

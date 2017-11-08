@@ -13,6 +13,10 @@ from scrapy.exceptions import DropItem
 
 class MundoDaCervejaPipeline(object):
     def process_item(self, item, spider):
+        for data in item:
+            if not data:
+                raise DropItem("{} faltando algum dado.".format(item['name']))
+
         return item
 
 
