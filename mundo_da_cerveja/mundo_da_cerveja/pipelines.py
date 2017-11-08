@@ -6,6 +6,7 @@
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 import pymongo
 import gridfs
+import logging
 from scrapy.conf import settings
 from scrapy.exceptions import DropItem
 
@@ -41,6 +42,7 @@ class MongoDBPipeline(object):
                                 'url': item['images'][0]['url']},
                                upsert=True)
 
+        logging.info('{} salva no MongoDB'.format(item['name']))
         return item
 
     def close_spider(self, spider):
